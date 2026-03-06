@@ -18,6 +18,7 @@
         "./skills/baoyu-xhs-images",
         "./skills/baoyu-post-to-x",
         "./skills/baoyu-post-to-wechat",
+        "./skills/baoyu-post-to-weibo",
         "./skills/baoyu-article-illustrator",
         "./skills/baoyu-cover-image",
         "./skills/baoyu-slide-deck",
