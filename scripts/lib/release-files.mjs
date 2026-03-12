@@ -8,8 +8,8 @@ const PACKAGE_DEPENDENCY_SECTIONS = [
   "devDependencies",
 ];
 
-const SKIPPED_DIRS = new Set([".git", ".clawhub", ".clawdhub", "node_modules"]);
-const SKIPPED_FILES = new Set([".DS_Store"]);
+const SKIPPED_DIRS = new Set([".git", ".clawhub", ".clawdhub", "node_modules", "out", "dist", "build"]);
+const SKIPPED_FILES = new Set([".DS_Store", "bun.lockb"]);
 
 export async function listReleaseFiles(root) {
   const resolvedRoot = path.resolve(root);
