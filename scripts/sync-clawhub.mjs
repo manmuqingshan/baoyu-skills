@@ -151,6 +151,9 @@ async function main() {
     .map((tag) => tag.trim())
     .filter(Boolean);
 
+  let succeeded = 0;
+  const failed = [];
+
   for (const candidate of actionable) {
     const version =
       candidate.status === "new"
@@ -158,20 +161,30 @@ async function main() {
         : bumpSemver(candidate.latestVersion, options.bump);
 
     console.log(`Publishing ${candidate.slug}@${version}`);
-    const files = await listTextFiles(candidate.folder);
-    await publishSkill({
-      registry,
-      token: config.token,
-      skill: candidate,
-      files,
-      version,
-      changelog: options.changelog,
-      tags,
-    });
+    try {
+      const files = await listTextFiles(candidate.folder);
+      await publishSkill({
+        registry,
+        token: config.token,
+        skill: candidate,
+        files,
+        version,
+        changelog: options.changelog,
+        tags,
+      });
+      succeeded++;
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      console.error(`SKIPPED ${candidate.slug}: ${msg}`);
+      failed.push(candidate.slug);
+    }
   }
 
   console.log("");
-  console.log(`Uploaded ${actionable.length} skill(s).`);
+  console.log(`Uploaded ${succeeded}/${actionable.length} skill(s).`);
+  if (failed.length > 0) {
+    console.log(`Failed (${failed.length}): ${failed.join(", ")}`);
+  }
 }
 
 function parseArgs(argv) {
