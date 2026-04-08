@@ -512,6 +512,7 @@ Smart article illustration skill with Type × Style two-dimension approach. Anal
 | `watercolor` | Soft artistic with natural warmth | Lifestyle, travel, creative |
 | `editorial` | Magazine-style infographic | Tech explainers, journalism |
 | `scientific` | Academic precise diagrams | Biology, chemistry, technical |
+| `macaron` | Soft macaron pastel blocks on warm cream | Educational, knowledge, tutorials |
 
 **Style Previews**:
 

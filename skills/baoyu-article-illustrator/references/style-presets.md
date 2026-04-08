@@ -22,6 +22,7 @@
 | `tutorial` | `flowchart` | `vector-illustration` | Step-by-step tutorials, setup guides |
 | `process-flow` | `flowchart` | `notion` | Workflow documentation, onboarding flows |
 | `warm-knowledge` | `infographic` | `vector-illustration` (warm palette) | Product showcases, team intros, feature cards, brand content |
+| `edu-visual` | `infographic` | `macaron` | Knowledge summaries, concept explainers, educational articles |
 
 ### Data & Analysis
 
@@ -55,14 +56,14 @@ Use this table during Step 3 to recommend presets based on Step 2 content analys
 | Content Type (Step 2) | Primary Preset | Alternatives |
 |------------------------|----------------|--------------|
 | Technical | `tech-explainer` | `system-design`, `architecture` |
-| Tutorial | `tutorial` | `process-flow`, `knowledge-base` |
+| Tutorial | `tutorial` | `process-flow`, `knowledge-base`, `edu-visual` |
 | Methodology / Framework | `system-design` | `architecture`, `process-flow` |
 | Data / Metrics | `data-report` | `versus`, `tech-explainer` |
 | Comparison / Review | `versus` | `business-compare`, `editorial-poster` |
 | Narrative / Personal | `storytelling` | `lifestyle`, `evolution` |
 | Opinion / Editorial | `opinion-piece` | `cinematic`, `editorial-poster` |
 | Historical / Timeline | `history` | `evolution` |
-| Academic / Research | `science-paper` | `tech-explainer`, `data-report` |
+| Academic / Research | `science-paper` | `tech-explainer`, `data-report`, `edu-visual` |
 | SaaS / Product | `saas-guide` | `knowledge-base`, `process-flow`, `warm-knowledge` |
 
 ## Override Examples

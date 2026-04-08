@@ -43,20 +43,21 @@ Use Core Styles for most cases. See full Style Gallery below for granular contro
 | `sketch` | Raw pencil notebook style | Brainstorming, creative exploration |
 | `screen-print` | Bold poster art, halftone textures, limited colors | Opinion, editorial, cultural, cinematic |
 | `sketch-notes` | Soft hand-drawn warm notes | Educational, warm notes |
+| `macaron` | Soft macaron pastel blocks on warm cream, clean educational layouts | Educational, knowledge, tutorials, concept explainers |
 | `vintage` | Aged parchment historical | Historical, heritage |
 
 Full specifications: `references/styles/<style>.md`
 
 ## Type × Style Compatibility Matrix
 
-| | vector-illustration | notion | warm | minimal | blueprint | watercolor | elegant | editorial | scientific | screen-print |
-|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| infographic | ✓✓ | ✓✓ | ✓ | ✓✓ | ✓✓ | ✓ | ✓✓ | ✓✓ | ✓✓ | ✓ |
-| scene | ✓ | ✓ | ✓✓ | ✓ | ✗ | ✓✓ | ✓ | ✓ | ✗ | ✓✓ |
-| flowchart | ✓✓ | ✓✓ | ✓ | ✓ | ✓✓ | ✗ | ✓ | ✓✓ | ✓ | ✗ |
-| comparison | ✓✓ | ✓✓ | ✓ | ✓✓ | ✓ | ✓ | ✓✓ | ✓✓ | ✓ | ✓ |
-| framework | ✓✓ | ✓✓ | ✓ | ✓✓ | ✓✓ | ✗ | ✓✓ | ✓ | ✓✓ | ✓ |
-| timeline | ✓ | ✓✓ | ✓ | ✓ | ✓ | ✓✓ | ✓✓ | ✓✓ | ✓ | ✓ |
+| | vector-illustration | notion | warm | minimal | blueprint | watercolor | elegant | editorial | scientific | screen-print | macaron |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| infographic | ✓✓ | ✓✓ | ✓ | ✓✓ | ✓✓ | ✓ | ✓✓ | ✓✓ | ✓✓ | ✓ | ✓✓ |
+| scene | ✓ | ✓ | ✓✓ | ✓ | ✗ | ✓✓ | ✓ | ✓ | ✗ | ✓✓ | ✓ |
+| flowchart | ✓✓ | ✓✓ | ✓ | ✓ | ✓✓ | ✗ | ✓ | ✓✓ | ✓ | ✗ | ✓✓ |
+| comparison | ✓✓ | ✓✓ | ✓ | ✓✓ | ✓ | ✓ | ✓✓ | ✓✓ | ✓ | ✓ | ✓✓ |
+| framework | ✓✓ | ✓✓ | ✓ | ✓✓ | ✓✓ | ✗ | ✓✓ | ✓ | ✓✓ | ✓ | ✓✓ |
+| timeline | ✓ | ✓✓ | ✓ | ✓ | ✓ | ✓✓ | ✓✓ | ✓✓ | ✓ | ✓ | ✓ |
 
 ✓✓ = highly recommended | ✓ = compatible | ✗ = not recommended
 
@@ -76,7 +77,7 @@ Full specifications: `references/styles/<style>.md`
 | Content Signals | Recommended Type | Recommended Style |
 |-----------------|------------------|-------------------|
 | API, metrics, data, comparison, numbers | infographic | blueprint, vector-illustration |
-| Knowledge, concept, tutorial, learning, guide | infographic | vector-illustration, notion |
+| Knowledge, concept, tutorial, learning, guide | infographic | vector-illustration, notion, macaron |
 | Tech, AI, programming, development, code | infographic | vector-illustration, blueprint |
 | How-to, steps, workflow, process, tutorial | flowchart | vector-illustration, notion |
 | Framework, model, architecture, principles | framework | blueprint, vector-illustration |
@@ -200,3 +201,28 @@ Full specifications: `references/styles/<style>.md`
 - Limited color coding (one color per concept level)
 - Clean silhouette-based iconography
 - Poster-style hierarchy with bold typography
+
+### infographic + macaron
+- Soft pastel color blocks (blue, mint, lavender, peach) as info zone backgrounds
+- Warm cream base with clear typography hierarchy
+- Rounded-corner cards and bubble containers
+- Coral Red accents for key data and emphasis
+- Bold summary quote at bottom
+
+### flowchart + macaron
+- Each step in a distinct macaron pastel card
+- Arrow chains connecting pastel containers
+- Clear progression with color-coded stages
+- Generous spacing between steps
+
+### comparison + macaron
+- Split columns with different pastel fills per side
+- Soft visual separation, not harsh dividers
+- Coral Red highlights for key differentiators
+- Bottom summary capturing the comparison insight
+
+### framework + macaron
+- Nodes as rounded pastel-filled cards
+- Hierarchical or network layout with soft connectors
+- Each concept level in a different macaron color
+- Clean labels with bold keywords

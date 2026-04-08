@@ -264,6 +264,37 @@ STYLE: [style characteristics]
 ASPECT: 16:9
 ```
 
+### Macaron Style Instructions
+
+When `style: macaron`, add these style instructions:
+
+```
+Educational infographic with soft macaron pastel color blocks on warm cream paper.
+COLORS: Warm Cream background (#F5F0E8), Macaron Blue (#A8D8EA), Macaron Mint (#B5E5CF),
+        Macaron Lavender (#D5C6E0), Macaron Peach (#FFD5C2), Coral Red (#E8655A) for emphasis,
+        Deep Charcoal (#2D2D2D) text, Warm Gray (#6B6B6B) annotations
+CONTAINERS: Rounded cards, bubbles, dashed-box frames with pastel fills to separate info zones
+TYPOGRAPHY: Bold large title, bold keywords, smaller muted annotations
+STRUCTURE: Auto-select best layout for content (flow→arrows, compare→columns, cycle→ring, cards→grid)
+BOTTOM: Bold summary quote at bottom capturing core insight
+```
+
+**Infographic + macaron**:
+```
+Educational infographic on warm cream paper (#F5F0E8). Soft macaron pastel blocks as info zones.
+COLORS: Macaron Blue (#A8D8EA), Mint (#B5E5CF), Lavender (#D5C6E0), Peach (#FFD5C2),
+        Coral Red (#E8655A) for key data, Deep Charcoal (#2D2D2D) text
+ELEMENTS: Rounded-corner cards with pastel fills, clear labels, bold title, summary quote at bottom
+```
+
+**Flowchart + macaron**:
+```
+Process flow on warm cream paper (#F5F0E8). Each step in a macaron pastel card.
+COLORS: Steps alternate Macaron Blue (#A8D8EA), Mint (#B5E5CF), Lavender (#D5C6E0), Peach (#FFD5C2),
+        Coral Red (#E8655A) for decision points, Deep Charcoal (#2D2D2D) outlines
+ELEMENTS: Rounded step containers, soft arrow connectors, bold step labels
+```
+
 ### Screen-Print Style Override
 
 When `style: screen-print`, replace standard style instructions with:

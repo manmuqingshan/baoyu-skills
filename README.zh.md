@@ -512,6 +512,7 @@ clawhub install baoyu-markdown-to-html
 | `watercolor` | 柔和艺术感、自然温暖 | 生活方式、旅行、创意 |
 | `editorial` | 杂志风格信息图 | 科技解说、新闻 |
 | `scientific` | 学术精确图表 | 生物、化学、技术 |
+| `macaron` | 马卡龙柔和色块、暖白底色 | 教育、知识分享、教程 |
 
 **风格预览**：
 
