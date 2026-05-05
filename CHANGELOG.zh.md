@@ -2,6 +2,15 @@
 
 [English](./CHANGELOG.md) | 中文
 
+## 1.114.0 - 2026-05-05
+
+### 新功能
+- `baoyu-infographic`：新增 `retro-popup-pop` 风格 —— 复古像素弹窗 × 波普信息图。画面由多个 80/90 年代桌面弹窗叠加而成（标题栏、关闭按钮、ERROR / ALERT 报错对话框、`PROBLEMS.EXE` 等复古文件窗、进度条、OK / CANCEL / FIX IT 按钮），统一粗黑描边、平涂色块，背景使用亮青蓝（#12B8DE）或复古奶油色（#F5F0E6）。与 `dense-modules` 布局尤其契合；同时升级为 `高密度信息大图` 关键词快捷方式与 `Product/Buying Guide` 内容类型的推荐风格。风格库从 21 个扩展至 22 个。
+  Credit to AJ@WaytoAGI.
+
+### 文档
+- `release-skills`：补充 GitHub Release 发布流程，包括从 changelog 段落提取 release notes、创建 annotated tag、执行 `gh release create/edit`，以及为已有 tag 回填历史 GitHub Releases。
+
 ## 1.113.0 - 2026-04-25
 
 ### 新功能
@@ -29,7 +38,7 @@
 
 ### 重构
 - 统一所有图片生成类技能（`baoyu-infographic`、`baoyu-comic`、`baoyu-cover-image`、`baoyu-image-cards`、`baoyu-article-illustrator`、`baoyu-slide-deck`、`baoyu-xhs-images`）的后端选择规则：新增单一 `preferred_image_backend` 偏好字段（`auto | ask | <backend-id>`），用 4 步解析规则（当前请求覆盖 → 已保存偏好 → 自动选择 → 询问用户）替换原有的无状态询问规则。默认优先使用运行时原生工具（如 Codex `imagegen`、Hermes `image_generate`）；未设置该字段的现有 `EXTEND.md` 文件视为 `auto`，无需升级 schema 版本。
-- 在每个图片技能中新增顶级 `## Changing Preferences` 章节,作为固定后端和修改常用偏好的一级入口。
+- 在每个图片技能中新增顶级 `## Changing Preferences` 章节，作为固定后端和修改常用偏好的一级入口。
 
 ## 1.110.0 - 2026-04-21
 
@@ -638,7 +647,7 @@
 ## 1.52.0 - 2026-03-06
 
 ### 新功能
-- `baoyu-post-to-weibo`：新增 `--video` 视频上传支持（图片+视频最多 18 个文件）
+- `baoyu-post-to-weibo`：新增 `--video` 视频上传支持（图片 + 视频最多 18 个文件）
 - `baoyu-post-to-weibo`：上传方式从剪贴板粘贴改为 `DOM.setFileInputFiles`，提升上传可靠性
 
 ### 修复
@@ -1101,7 +1110,7 @@
 ## 1.20.0 - 2026-01-24
 
 ### 新功能
-- `baoyu-cover-image`：从类型 × 风格二维系统升级为**四维系统**——新增 `--text` 维度（none 无文字、title-only 仅标题、title-subtitle 标题+副标题、text-rich 丰富文字）控制文字密度，新增 `--mood` 维度（subtle 低调、balanced 平衡、bold 醒目）控制情感强度。新增 `--quick` 标志跳过确认，直接使用自动选择。
+- `baoyu-cover-image`：从类型 × 风格二维系统升级为**四维系统**——新增 `--text` 维度（none 无文字、title-only 仅标题、title-subtitle 标题 + 副标题、text-rich 丰富文字）控制文字密度，新增 `--mood` 维度（subtle 低调、balanced 平衡、bold 醒目）控制情感强度。新增 `--quick` 标志跳过确认，直接使用自动选择。
 
 ### 文档
 - `baoyu-cover-image`：新增维度参考文件——`references/dimensions/text.md`（文字密度级别）和 `references/dimensions/mood.md`（氛围强度级别）。
@@ -1121,7 +1130,7 @@
 - `baoyu-image-gen`：代码模块化——类型定义提取至 `types.ts`，provider 实现提取至 `providers/google.ts` 和 `providers/openai.ts`。
 
 ### 文档
-- `baoyu-comic`：改进 ohmsha 预设文档，明确默认哆啦A梦角色定义和视觉描述。
+- `baoyu-comic`：改进 ohmsha 预设文档，明确默认哆啦 A 梦角色定义和视觉描述。
 
 ## 1.18.3 - 2026-01-23
 

@@ -2,6 +2,15 @@
 
 English | [中文](./CHANGELOG.zh.md)
 
+## 1.114.0 - 2026-05-05
+
+### Features
+- `baoyu-infographic`: add `retro-popup-pop` style — retro pixel popup × pop-art collage. Renders content as a stack of 80/90s desktop popup windows (title bars, close buttons, ERROR / ALERT dialogs, file windows like `PROBLEMS.EXE`, progress bars, OK / CANCEL / FIX IT buttons) with thick black outlines, flat color fills, and bright cyan (#12B8DE) or vintage cream (#F5F0E6) backgrounds. Pairs especially well with the `dense-modules` layout; promoted as a recommended style for the `高密度信息大图` keyword shortcut and the `Product/Buying Guide` content type. Style Gallery count goes from 21 to 22.
+  Credit to AJ@WaytoAGI.
+
+### Documentation
+- `release-skills`: document GitHub Release publishing in the release workflow, including release-notes extraction from changelog sections, annotated tag creation, `gh release create/edit`, and historical release backfill for existing tags.
+
 ## 1.113.0 - 2026-04-25
 
 ### Features
@@ -682,7 +691,7 @@ English | [中文](./CHANGELOG.zh.md)
 - `baoyu-format-markdown`: add reader-perspective content analysis phase — analyzes highlights, structure, and formatting issues before applying formatting
 - `baoyu-format-markdown`: restructure workflow from 8 steps to 7 with explicit do/don't formatting principles and completion report
 - `baoyu-translate`: extract Step 2 workflow mechanics to separate reference file for cleaner SKILL.md
-- `baoyu-translate`: expand trigger keywords (改成中文, 快翻, 本地化, etc.) for better skill activation
+- `baoyu-translate`: expand trigger keywords (改成中文，快翻，本地化，etc.) for better skill activation
 - `baoyu-translate`: add proactive warning for long content in quick mode
 - `baoyu-translate`: save frontmatter to `chunks/frontmatter.md` during chunking
 
