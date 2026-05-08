@@ -2,6 +2,11 @@
 
 [English](./CHANGELOG.md) | 中文
 
+## 1.114.1 - 2026-05-08
+
+### 修复
+- `baoyu-danger-gemini-web`：修复当前 Gemini Web 响应中生成图 URL 以 `https://lh3.googleusercontent.com/gg-dl/` 形式出现、但不再包含旧版生成图 marker 时的图片提取失败问题。补充该响应形态的回归测试。 (by @evilstar2016)
+
 ## 1.114.0 - 2026-05-05
 
 ### 新功能

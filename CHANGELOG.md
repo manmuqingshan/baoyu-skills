@@ -2,6 +2,11 @@
 
 English | [中文](./CHANGELOG.zh.md)
 
+## 1.114.1 - 2026-05-08
+
+### Fixes
+- `baoyu-danger-gemini-web`: restore generated-image extraction for current Gemini Web responses where image URLs appear as `https://lh3.googleusercontent.com/gg-dl/` without the legacy generated-image markers. Adds regression coverage for the fallback response shape. (by @evilstar2016)
+
 ## 1.114.0 - 2026-05-05
 
 ### Features
