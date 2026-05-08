@@ -459,6 +459,32 @@ export class GeminiClient extends GemMixin {
             }
           }
 
+          // Fallback: unconditionally scan all response parts for generated image URLs.
+          // The `wants_generated` detection above relies on `candidate[12][7][0]` and an old
+          // `googleusercontent.com/image_generation_content/` URL pattern, both of which no
+          // longer appear in the current Gemini Web API response format.
+          // When Gemini does generate images, their URLs now start with
+          // `https://lh3.googleusercontent.com/gg-dl/` and are present somewhere in the
+          // response parts — this fallback finds them so images are not silently dropped.
+          if (generated_images.length === 0) {
+            for (let part_index = body_index; part_index < (response_json as unknown[]).length; part_index++) {
+              const part = (response_json as unknown[])[part_index];
+              if (!Array.isArray(part)) continue;
+              const part_body = get_nested_value<string | null>(part, [2], null);
+              if (!part_body) continue;
+              try {
+                const part_json = JSON.parse(part_body) as unknown[];
+                const cand = get_nested_value<unknown>(part_json, [4, candidate_index], null);
+                if (!cand) continue;
+                const urls = collect_strings(cand, (s) => s.startsWith('https://lh3.googleusercontent.com/gg-dl/'), 4);
+                for (const url of urls) {
+                  generated_images.push(new GeneratedImage(url, '[Generated Image]', '', this.proxy, this.cookies));
+                }
+                if (generated_images.length > 0) break;
+              } catch {}
+            }
+          }
+
           out.push(new Candidate({ rcid, text, thoughts, web_images, generated_images }));
         }
 
