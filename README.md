@@ -834,7 +834,7 @@ AI SDK-based image generation using OpenAI GPT Image 2, Azure OpenAI, Google, Op
 | `DASHSCOPE_BASE_URL` | Custom DashScope endpoint | - |
 | `ZAI_BASE_URL` | Custom Z.AI endpoint | `https://api.z.ai/api/paas/v4` |
 | `BIGMODEL_BASE_URL` | Backward-compatible alias for Z.AI endpoint | - |
-| `MINIMAX_BASE_URL` | Custom MiniMax endpoint | `https://api.minimax.io` |
+| `MINIMAX_BASE_URL` | Custom MiniMax endpoint | `https://api.minimaxi.com` |
 | `REPLICATE_BASE_URL` | Custom Replicate endpoint | - |
 | `JIMENG_BASE_URL` | Custom Jimeng endpoint | `https://visual.volcengineapi.com` |
 | `JIMENG_REGION` | Jimeng region | `cn-north-1` |
@@ -1167,7 +1167,7 @@ ZAI_IMAGE_MODEL=glm-image
 # MiniMax
 MINIMAX_API_KEY=xxx
 MINIMAX_IMAGE_MODEL=image-01
-# MINIMAX_BASE_URL=https://api.minimax.io
+# MINIMAX_BASE_URL=https://api.minimaxi.com
 
 # Replicate
 REPLICATE_API_TOKEN=r8_xxx

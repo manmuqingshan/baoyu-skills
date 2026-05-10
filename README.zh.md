@@ -834,7 +834,7 @@ AI 驱动的生成后端。
 | `DASHSCOPE_BASE_URL` | 自定义 DashScope 端点 | - |
 | `ZAI_BASE_URL` | 自定义 Z.AI 端点 | `https://api.z.ai/api/paas/v4` |
 | `BIGMODEL_BASE_URL` | Z.AI 端点向后兼容别名 | - |
-| `MINIMAX_BASE_URL` | 自定义 MiniMax 端点 | `https://api.minimax.io` |
+| `MINIMAX_BASE_URL` | 自定义 MiniMax 端点 | `https://api.minimaxi.com` |
 | `REPLICATE_BASE_URL` | 自定义 Replicate 端点 | - |
 | `JIMENG_BASE_URL` | 自定义即梦端点 | `https://visual.volcengineapi.com` |
 | `JIMENG_REGION` | 即梦区域 | `cn-north-1` |
@@ -1167,7 +1167,7 @@ ZAI_IMAGE_MODEL=glm-image
 # MiniMax
 MINIMAX_API_KEY=xxx
 MINIMAX_IMAGE_MODEL=image-01
-# MINIMAX_BASE_URL=https://api.minimax.io
+# MINIMAX_BASE_URL=https://api.minimaxi.com
 
 # Replicate
 REPLICATE_API_TOKEN=r8_xxx
