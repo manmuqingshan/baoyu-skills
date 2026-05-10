@@ -2,6 +2,12 @@
 
 [English](./CHANGELOG.md) | 中文
 
+## 1.115.1 - 2026-05-10
+
+### 修复
+- `baoyu-imagine`：将默认 MiniMax 图片 API 端点改为 `https://api.minimaxi.com`，与当前官方图片生成文档保持一致；仍可通过 `MINIMAX_BASE_URL` 覆盖为 `https://api.minimax.io`。
+- `baoyu-image-gen`：同步已废弃图片生成入口的 MiniMax 默认端点和回归测试。
+
 ## 1.115.0 - 2026-05-09
 
 ### 新功能

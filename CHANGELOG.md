@@ -2,6 +2,12 @@
 
 English | [中文](./CHANGELOG.zh.md)
 
+## 1.115.1 - 2026-05-10
+
+### Fixes
+- `baoyu-imagine`: change the default MiniMax image API endpoint to `https://api.minimaxi.com` to match the current official image generation documentation, while keeping `https://api.minimax.io` available through `MINIMAX_BASE_URL` overrides.
+- `baoyu-image-gen`: sync the deprecated image-generation entrypoint with the same MiniMax default endpoint and regression coverage.
+
 ## 1.115.0 - 2026-05-09
 
 ### Features
