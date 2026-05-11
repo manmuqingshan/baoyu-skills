@@ -173,3 +173,5 @@ diagram/
 .worktrees/
 youtube-transcript/
 .omx/
+.codex-tmp/
+outputs/
