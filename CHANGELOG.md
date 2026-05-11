@@ -2,6 +2,11 @@
 
 English | [中文](./CHANGELOG.zh.md)
 
+## 1.115.4 - 2026-05-11
+
+### Documentation
+- Image generation backend selection: emphasize Codex `imagegen` as the priority runtime-native tool (invoke via the `Skill` tool with `skill: "imagegen"`) and forbid SVG/HTML/canvas substitution when no raster backend can be resolved — fall through to asking the user instead of silently emitting code-based art. Updated in `docs/image-generation-tools.md` and inlined into `baoyu-article-illustrator`, `baoyu-comic`, `baoyu-cover-image`, `baoyu-image-cards`, `baoyu-infographic`, `baoyu-slide-deck`, and `baoyu-xhs-images`.
+
 ## 1.115.3 - 2026-05-11
 
 ### Fixes

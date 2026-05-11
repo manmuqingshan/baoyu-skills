@@ -2,6 +2,11 @@
 
 [English](./CHANGELOG.md) | 中文
 
+## 1.115.4 - 2026-05-11
+
+### 文档
+- 图片生成后端选择规则强化：明确将 Codex `imagegen` 作为运行时原生工具的优先项（通过 `Skill` 工具调用，`skill: "imagegen"`），并禁止在无可用光栅后端时降级为 SVG/HTML/canvas 等代码渲染 —— 应退回到询问用户，而非静默输出代码绘图。规则同步更新到 `docs/image-generation-tools.md`，并按自包含规则内联到 `baoyu-article-illustrator`、`baoyu-comic`、`baoyu-cover-image`、`baoyu-image-cards`、`baoyu-infographic`、`baoyu-slide-deck`、`baoyu-xhs-images`。
+
 ## 1.115.3 - 2026-05-11
 
 ### 修复
