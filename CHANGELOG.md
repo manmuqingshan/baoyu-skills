@@ -2,6 +2,12 @@
 
 English | [中文](./CHANGELOG.zh.md)
 
+## 1.115.3 - 2026-05-11
+
+### Fixes
+- `baoyu-post-to-wechat`: ensure tab activation before copy/paste in WeChat editor (by @fengxiaodong28)
+- `baoyu-post-to-x`: use toolbar media upload instead of image clipboard paste for X Articles
+
 ## 1.115.2 - 2026-05-10
 
 ### Fixes
