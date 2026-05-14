@@ -325,8 +325,8 @@ Always reflects only the most recent normal digest. Overwrite on each run when `
 ```json
 {
   "group_id": "12345678901@chatroom",
-  "group_name": "消失的大叔",
-  "folder": "12345678901@chatroom-消失的大叔",
+  "group_name": "相亲相爱一家人",
+  "folder": "12345678901@chatroom-相亲相爱一家人",
   "last_digest": {
     "file": "2026-03-12.md",
     "date_range": "2026-03-12",
@@ -393,7 +393,7 @@ Full procedure in [references/profiles.md](references/profiles.md).
 
 ```
 {data_root}/                                        # default: {project_root}/wechat/
-└── {group_id}-{group_name}/                        # e.g. 12345678901@chatroom-消失的大叔/
+└── {group_id}-{group_name}/                        # e.g. 12345678901@chatroom-相亲相爱一家人/
     ├── history.json                                # last digest pointer (fast)
     ├── history-digests.jsonl                       # append-only archive
     ├── 2026-03-12.md                               # normal digest, single date
