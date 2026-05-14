@@ -1112,6 +1112,36 @@ AI 驱动的生成后端。
 - 为文化/专业术语添加译注
 - 输出目录保留所有中间文件
 
+#### baoyu-wechat-summary
+
+微信群聊精华提取。使用 [wx-cli](https://github.com/jackwener/wx-cli) 从群消息中提取话题、引言和统计数据，生成结构化简报。支持跨次运行的群聊历史和群友画像维护，可生成正常版和毒舌版。
+
+```bash
+# 总结群最近消息
+/baoyu-wechat-summary 消失的大叔 最近 1 天
+
+# 周报
+/baoyu-wechat-summary AI 技术群 最近 7 天
+
+# 增量模式（从上次摘要继续）
+/baoyu-wechat-summary 消失的大叔
+
+# 毒舌版
+/baoyu-wechat-summary 消失的大叔 最近 3 天 毒舌版
+```
+
+**前置要求**：
+- 安装 [wx-cli](https://github.com/jackwener/wx-cli)（`npm install -g @jackwener/wx-cli`）
+- macOS 上运行并登录 WeChat 4.x
+
+**特性**：
+- 话题提取，带归属和引言
+- 发言排行榜和群友画像
+- 增量模式（从上次摘要断点继续）
+- 大批量消息自动按天分割
+- 正常版和毒舌版两种风格
+- 支持从历史摘要回溯初始化画像
+
 ## 环境配置
 
 部分技能需要 API 密钥或自定义配置。环境变量可以在 `.env` 文件中设置：

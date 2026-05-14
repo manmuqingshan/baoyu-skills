@@ -1112,6 +1112,36 @@ Custom style descriptions are also accepted, e.g., `--style "poetic and lyrical"
 - Translator's notes for cultural/domain-specific references
 - Output directory with all intermediate files preserved
 
+#### baoyu-wechat-summary
+
+Summarize WeChat group chat highlights into a structured digest. Extracts topics, quotes, and stats from group messages using [wx-cli](https://github.com/jackwener/wx-cli). Maintains per-group history and per-user profiles across runs. Supports normal and roast (毒舌) versions.
+
+```bash
+# Summarize a group's recent messages
+/baoyu-wechat-summary 消失的大叔 最近 1 天
+
+# Weekly summary
+/baoyu-wechat-summary AI 技术群 最近 7 天
+
+# Incremental (since last digest)
+/baoyu-wechat-summary 消失的大叔
+
+# Roast version
+/baoyu-wechat-summary 消失的大叔 最近 3 天 毒舌版
+```
+
+**Requirements**:
+- [wx-cli](https://github.com/jackwener/wx-cli) installed (`npm install -g @jackwener/wx-cli`)
+- WeChat 4.x running and logged in on macOS
+
+**Features**:
+- Topic extraction with attribution and quotes
+- Message leaderboard and per-user profiles
+- Incremental mode (picks up where last digest left off)
+- Multi-day range splitting for large batches
+- Normal and roast (毒舌) digest versions
+- Profile backfill from historical digests
+
 ## Environment Configuration
 
 Some skills require API keys or custom configuration. Environment variables can be set in `.env` files:

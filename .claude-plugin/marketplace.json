@@ -33,7 +33,8 @@
         "./skills/baoyu-translate",
         "./skills/baoyu-url-to-markdown",
         "./skills/baoyu-image-cards",
-        "./skills/baoyu-youtube-transcript"
+        "./skills/baoyu-youtube-transcript",
+        "./skills/baoyu-wechat-summary"
       ]
     }
   ]
