@@ -2,6 +2,14 @@
 
 English | [中文](./CHANGELOG.zh.md)
 
+## 1.116.5 - 2026-05-14
+
+### Features
+- `baoyu-post-to-wechat`: send WeChat login QR code to Telegram when `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` env vars are set, enabling headless / remote login flows (by @beforesun)
+
+### Refactor
+- `baoyu-post-to-wechat`: harden Telegram QR notification — add 10s fetch timeout, defer the 2s QR-render wait until env vars are configured, and use viewport screenshot as fallback
+
 ## 1.116.4 - 2026-05-14
 
 ### Refactor

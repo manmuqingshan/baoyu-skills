@@ -2,6 +2,14 @@
 
 [English](./CHANGELOG.md) | 中文
 
+## 1.116.5 - 2026-05-14
+
+### 新功能
+- `baoyu-post-to-wechat`：当设置 `TELEGRAM_BOT_TOKEN` 和 `TELEGRAM_CHAT_ID` 环境变量时，自动将微信登录二维码发送到 Telegram，支持无显示器/远程登录场景 (by @beforesun)
+
+### 重构
+- `baoyu-post-to-wechat`：加固 Telegram QR 通知逻辑 —— 增加 10 秒 fetch 超时、未配置环境变量时不再无谓等待 2 秒、回退截图改为视口范围以减小体积
+
 ## 1.116.4 - 2026-05-14
 
 ### 重构
