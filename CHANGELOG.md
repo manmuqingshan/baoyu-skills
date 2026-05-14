@@ -2,6 +2,11 @@
 
 English | [中文](./CHANGELOG.zh.md)
 
+## 1.116.0 - 2026-05-13
+
+### Features
+- Add `baoyu-wechat-summary` skill: summarize WeChat group chat highlights into structured digests with topic extraction, message leaderboards, and per-user profiles. Supports normal and roast (毒舌) versions, incremental mode, and profile backfill. Requires [wx-cli](https://github.com/jackwener/wx-cli).
+
 ## 1.115.4 - 2026-05-11
 
 ### Documentation
