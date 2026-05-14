@@ -2,7 +2,7 @@
 
 English | [中文](./README.zh.md)
 
-Skills shared by Baoyu for improving daily work efficiency with Claude Code.
+Skills shared by Baoyu for improving daily work efficiency with AI Agents (Claude Code, Codex, etc.).
 
 ## Prerequisites
 
@@ -40,7 +40,7 @@ Publishing to ClawHub releases the published skill under `MIT-0`, per ClawHub's 
 
 ### Register as Plugin Marketplace
 
-Run the following command in Claude Code:
+Run the following command in the Agent:
 
 ```bash
 /plugin marketplace add JimLiu/baoyu-skills
@@ -64,7 +64,7 @@ Run the following command in Claude Code:
 
 **Option 3: Ask the Agent**
 
-Simply tell Claude Code:
+Simply tell the Agent:
 
 > Please install Skills from github.com/JimLiu/baoyu-skills
 
@@ -80,7 +80,7 @@ The marketplace now exposes a single plugin so each skill is registered exactly 
 
 To update skills to the latest version:
 
-1. Run `/plugin` in Claude Code
+1. Run `/plugin` in the Agent
 2. Switch to **Marketplaces** tab (use arrow keys or Tab)
 3. Select **baoyu-skills**
 4. Choose **Update marketplace**
@@ -579,7 +579,7 @@ Plain text input is treated as a regular post. Markdown files are treated as X A
 
 ```bash
 # Post with text
-/baoyu-post-to-x "Hello from Claude Code!"
+/baoyu-post-to-x "Hello from AI Agent!"
 
 # Post with images
 /baoyu-post-to-x "Check this out" --image photo.png
@@ -1118,16 +1118,16 @@ Summarize WeChat group chat highlights into a structured digest. Extracts topics
 
 ```bash
 # Summarize a group's recent messages
-/baoyu-wechat-summary 消失的大叔 最近 1 天
+/baoyu-wechat-summary 相亲相爱一家人 最近 1 天
 
 # Weekly summary
 /baoyu-wechat-summary AI 技术群 最近 7 天
 
 # Incremental (since last digest)
-/baoyu-wechat-summary 消失的大叔
+/baoyu-wechat-summary 相亲相爱一家人
 
 # Roast version
-/baoyu-wechat-summary 消失的大叔 最近 3 天 毒舌版
+/baoyu-wechat-summary 相亲相爱一家人 最近 3 天 毒舌版
 ```
 
 **Requirements**:

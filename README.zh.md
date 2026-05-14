@@ -2,7 +2,7 @@
 
 [English](./README.md) | 中文
 
-宝玉分享的 Claude Code 技能集，提升日常工作效率。
+宝玉分享的 AI Agent 技能集（适用于 Claude Code、Codex 等），提升日常工作效率。
 
 ## 前置要求
 
@@ -40,7 +40,7 @@ clawhub install baoyu-markdown-to-html
 
 ### 注册插件市场
 
-在 Claude Code 中运行：
+在 Agent 中运行：
 
 ```bash
 /plugin marketplace add JimLiu/baoyu-skills
@@ -64,7 +64,7 @@ clawhub install baoyu-markdown-to-html
 
 **方式三：告诉 Agent**
 
-直接告诉 Claude Code：
+直接告诉 Agent：
 
 > 请帮我安装 github.com/JimLiu/baoyu-skills 中的 Skills
 
@@ -80,7 +80,7 @@ clawhub install baoyu-markdown-to-html
 
 更新技能到最新版本：
 
-1. 在 Claude Code 中运行 `/plugin`
+1. 在 Agent 中运行 `/plugin`
 2. 切换到 **Marketplaces** 标签页（使用方向键或 Tab）
 3. 选择 **baoyu-skills**
 4. 选择 **Update marketplace**
@@ -579,7 +579,7 @@ clawhub install baoyu-markdown-to-html
 
 ```bash
 # 发布文字
-/baoyu-post-to-x "Hello from Claude Code!"
+/baoyu-post-to-x "Hello from AI Agent!"
 
 # 发布带图片
 /baoyu-post-to-x "看看这个" --image photo.png
@@ -1118,16 +1118,16 @@ AI 驱动的生成后端。
 
 ```bash
 # 总结群最近消息
-/baoyu-wechat-summary 消失的大叔 最近 1 天
+/baoyu-wechat-summary 相亲相爱一家人 最近 1 天
 
 # 周报
 /baoyu-wechat-summary AI 技术群 最近 7 天
 
 # 增量模式（从上次摘要继续）
-/baoyu-wechat-summary 消失的大叔
+/baoyu-wechat-summary 相亲相爱一家人
 
 # 毒舌版
-/baoyu-wechat-summary 消失的大叔 最近 3 天 毒舌版
+/baoyu-wechat-summary 相亲相爱一家人 最近 3 天 毒舌版
 ```
 
 **前置要求**：
