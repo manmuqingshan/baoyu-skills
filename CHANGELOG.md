@@ -2,6 +2,11 @@
 
 English | [中文](./CHANGELOG.zh.md)
 
+## 1.116.3 - 2026-05-13
+
+### Documentation
+- Replace Claude Code references with generic Agent wording in READMEs to reflect multi-agent support (Claude Code, Codex, etc.)
+
 ## 1.116.2 - 2026-05-13
 
 ### Documentation

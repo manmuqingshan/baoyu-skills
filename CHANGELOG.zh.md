@@ -2,6 +2,11 @@
 
 [English](./CHANGELOG.md) | 中文
 
+## 1.116.3 - 2026-05-13
+
+### 文档
+- README 中将 Claude Code 替换为通用的 Agent 表述，体现多 Agent 支持（Claude Code、Codex 等）
+
 ## 1.116.2 - 2026-05-13
 
 ### 文档
