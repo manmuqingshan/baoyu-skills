@@ -2,6 +2,11 @@
 
 English | [中文](./CHANGELOG.zh.md)
 
+## 1.116.1 - 2026-05-13
+
+### Features
+- `baoyu-wechat-summary`: add `data_root` option to first-time setup flow, allowing users to customize the digest output directory during initialization
+
 ## 1.116.0 - 2026-05-13
 
 ### Features
