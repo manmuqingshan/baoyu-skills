@@ -97,9 +97,10 @@ For option 2, scan the sessions for any private/group thread the user has sent i
 - `self_wxid` (e.g., `wxid_abc123`) — fall-back hint: the user can find it with `wx contacts --query "<own nickname>"`, or by inspecting any of their own sent messages in `wx sessions --json`
 - `self_display` (e.g., `宝玉`) — how they want their messages attributed
 - `default_version` — pick one of `normal` / `roast` / `both`
+- `data_root` — where digest folders live. Default: `{project_root}/wechat`. Enter a custom absolute path (e.g. `~/Documents/wechat-digests`) or leave blank for default.
 - Save location — pick one of project / XDG / home
 
-Write EXTEND.md to the chosen path, confirm "Preferences saved to [path]. Edit it any time to change defaults.", then continue with the digest workflow.
+Write EXTEND.md to the chosen path. If the user provided a non-default `data_root`, include it as an uncommented line; otherwise omit it (the default applies automatically). Confirm "Preferences saved to [path]. Edit it any time to change defaults.", then continue with the digest workflow.
 
 ## Workflow
 
