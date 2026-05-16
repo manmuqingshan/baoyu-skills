@@ -2,6 +2,15 @@
 
 English | [中文](./CHANGELOG.zh.md)
 
+## 1.117.0 - 2026-05-16
+
+### Features
+- `baoyu-article-illustrator`: add batch generation policy — backend native batch first, runtime parallel calls second, sequential fallback; configurable `generation_batch_size` and `--batch-size` option
+- `baoyu-comic`: add batch generation policy with dependency-aware ordering (character sheet before pages) and configurable `--batch-size`
+- `baoyu-image-cards`: add batch generation policy honoring image-1 anchor chain, with configurable `--batch-size`
+- `baoyu-slide-deck`: add batch generation policy for slide image rendering with configurable `--batch-size`
+- `baoyu-xhs-images`: sync batch generation policy from baoyu-image-cards
+
 ## 1.116.5 - 2026-05-14
 
 ### Features

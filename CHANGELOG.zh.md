@@ -2,6 +2,15 @@
 
 [English](./CHANGELOG.md) | 中文
 
+## 1.117.0 - 2026-05-16
+
+### 新功能
+- `baoyu-article-illustrator`：新增批量生成策略 —— 优先使用后端原生批量接口，其次运行时并行调用，最后顺序生成；支持 `generation_batch_size` 配置和 `--batch-size` 参数
+- `baoyu-comic`：新增批量生成策略，支持依赖感知排序（角色图先于页面）和 `--batch-size` 参数
+- `baoyu-image-cards`：新增批量生成策略，遵循 image-1 锚定链，支持 `--batch-size` 参数
+- `baoyu-slide-deck`：新增幻灯片图片批量生成策略，支持 `--batch-size` 参数
+- `baoyu-xhs-images`：同步 baoyu-image-cards 的批量生成策略
+
 ## 1.116.5 - 2026-05-14
 
 ### 新功能
