@@ -40,6 +40,17 @@ test("browser article inserts inline images through WeChat local upload instead 
   assert.doesNotMatch(articleScript, /await copyImageToClipboard\(img\.localPath\)/);
 });
 
+test("browser article uploads original images before fallback processing", () => {
+  const rawUploadIndex = articleScript.indexOf("await uploadImagePathThroughFileInput(session, absolutePath, beforeCount)");
+  const fallbackIndex = articleScript.indexOf("const fallback = await prepareFallbackWechatBodyImageUpload(absolutePath)");
+
+  assert.notEqual(rawUploadIndex, -1);
+  assert.notEqual(fallbackIndex, -1);
+  assert.ok(rawUploadIndex < fallbackIndex);
+  assert.match(articleScript, /prepareWechatBodyImageUpload/);
+  assert.match(articleScript, /Raw image upload failed, retrying with fallback processing/);
+});
+
 test("browser article waits for a saved draft appmsgid before reporting success", () => {
   assert.match(articleScript, /waitForDraftSaved/);
   assert.match(articleScript, /appmsgid/);
