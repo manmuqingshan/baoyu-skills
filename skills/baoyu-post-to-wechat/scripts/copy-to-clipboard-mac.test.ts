@@ -12,3 +12,9 @@ test("macOS image clipboard copy avoids Swift AppKit JIT", () => {
   assert.match(clipboardScript, /copyImageMacWithOsascript/);
   assert.doesNotMatch(clipboardScript, /await runCommand\('swift', \[swiftPath, 'image', imagePath\]\)/);
 });
+
+test("macOS image clipboard copy converts WebP to PNG before AppleScript", () => {
+  assert.match(clipboardScript, /convertWebpMacToPng/);
+  assert.match(clipboardScript, /path\.extname\(imagePath\)\.toLowerCase\(\) === '\.webp'/);
+  assert.match(clipboardScript, /await copyImageMacWithOsascript\(pngPath\)/);
+});

@@ -1,10 +1,12 @@
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 import process from 'node:process';
 import { fileURLToPath } from 'node:url';
 import { launchChrome, tryConnectExisting, findExistingChromeDebugPort, getPageSession, waitForNewTab, clickElement, typeText, evaluate, sleep, getAccountProfileDir, type ChromeSession, type CdpConnection } from './cdp.ts';
 import { loadWechatExtendConfig, resolveAccount } from './wechat-extend-config.ts';
+import { prepareWechatBodyImageUpload } from './wechat-image-processor.ts';
 
 const WECHAT_URL = 'https://mp.weixin.qq.com/';
 const BODY_EDITOR_SELECTOR = '.rich_media_content .ProseMirror';
@@ -651,11 +653,32 @@ async function waitForBodyImageCount(session: ChromeSession, minimumCount: numbe
   return false;
 }
 
-async function uploadImageThroughFileInput(session: ChromeSession, imagePath: string): Promise<void> {
-  const absolutePath = path.isAbsolute(imagePath) ? imagePath : path.resolve(process.cwd(), imagePath);
-  if (!fs.existsSync(absolutePath)) throw new Error(`Image file not found: ${absolutePath}`);
+function inferImageContentType(imagePath: string): string {
+  const ext = path.extname(imagePath).toLowerCase();
+  switch (ext) {
+    case '.jpg':
+    case '.jpeg':
+      return 'image/jpeg';
+    case '.png':
+      return 'image/png';
+    case '.gif':
+      return 'image/gif';
+    case '.webp':
+      return 'image/webp';
+    case '.bmp':
+      return 'image/bmp';
+    case '.svg':
+      return 'image/svg+xml';
+    default:
+      return 'application/octet-stream';
+  }
+}
 
-  const beforeCount = await getBodyImageCount(session);
+async function uploadImagePathThroughFileInput(
+  session: ChromeSession,
+  absolutePath: string,
+  beforeCount: number,
+): Promise<void> {
   const documentNode = await session.cdp.send<{ root: { nodeId: number } }>('DOM.getDocument', {
     depth: -1,
     pierce: true,
@@ -676,6 +699,72 @@ async function uploadImageThroughFileInput(session: ChromeSession, imagePath: st
   if (!inserted) {
     const afterCount = await getBodyImageCount(session);
     throw new Error(`Image upload did not insert into editor: ${path.basename(absolutePath)} (${beforeCount} -> ${afterCount})`);
+  }
+}
+
+interface FallbackUploadImage {
+  uploadPath: string;
+  wasProcessed: boolean;
+  processingNotes: string[];
+  cleanup: () => void;
+}
+
+async function prepareFallbackWechatBodyImageUpload(absolutePath: string): Promise<FallbackUploadImage> {
+  const buffer = fs.readFileSync(absolutePath);
+  const prepared = await prepareWechatBodyImageUpload({
+    buffer,
+    filename: path.basename(absolutePath),
+    contentType: inferImageContentType(absolutePath),
+    fileExt: path.extname(absolutePath).toLowerCase(),
+    fileSize: buffer.length,
+  });
+
+  if (!prepared.wasProcessed) {
+    return {
+      uploadPath: absolutePath,
+      wasProcessed: false,
+      processingNotes: [],
+      cleanup: () => {},
+    };
+  }
+
+  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'wechat-body-image-'));
+  const uploadPath = path.join(tempDir, prepared.filename);
+  fs.writeFileSync(uploadPath, prepared.buffer);
+
+  return {
+    uploadPath,
+    wasProcessed: true,
+    processingNotes: prepared.processingNotes,
+    cleanup: () => fs.rmSync(tempDir, { recursive: true, force: true }),
+  };
+}
+
+async function uploadImageThroughFileInput(session: ChromeSession, imagePath: string): Promise<void> {
+  const absolutePath = path.isAbsolute(imagePath) ? imagePath : path.resolve(process.cwd(), imagePath);
+  if (!fs.existsSync(absolutePath)) throw new Error(`Image file not found: ${absolutePath}`);
+
+  const beforeCount = await getBodyImageCount(session);
+  try {
+    await uploadImagePathThroughFileInput(session, absolutePath, beforeCount);
+    return;
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    if (message.includes('local image upload input not found')) throw err;
+
+    const currentCount = await getBodyImageCount(session);
+    if (currentCount > beforeCount) return;
+
+    console.warn(`[wechat] Raw image upload failed, retrying with fallback processing: ${message}`);
+    const fallback = await prepareFallbackWechatBodyImageUpload(absolutePath);
+    const notes = fallback.processingNotes.length > 0 ? ` (${fallback.processingNotes.join('; ')})` : '';
+    console.log(`[wechat] Retrying image upload with ${fallback.wasProcessed ? 'processed' : 'original'} file: ${path.basename(fallback.uploadPath)}${notes}`);
+
+    try {
+      await uploadImagePathThroughFileInput(session, fallback.uploadPath, currentCount);
+    } finally {
+      fallback.cleanup();
+    }
   }
 }
 

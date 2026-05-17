@@ -1,9 +1,12 @@
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
-import { mkdtemp, rm, writeFile } from 'node:fs/promises';
+import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import process from 'node:process';
+import { fileURLToPath } from 'node:url';
+import decodeWebp, { init as initWebpDecode } from '@jsquash/webp/decode.js';
+import { Jimp, JimpMime } from 'jimp';
 
 const SUPPORTED_IMAGE_EXTS = new Set(['.jpg', '.jpeg', '.png', '.gif', '.webp']);
 
@@ -205,6 +208,35 @@ function getAppleScriptImageType(imagePath: string): string {
   }
 }
 
+let webpDecoderReady: Promise<void> | undefined;
+
+async function ensureWebpDecoder(): Promise<void> {
+  if (!webpDecoderReady) {
+    webpDecoderReady = (async () => {
+      const __filename = fileURLToPath(import.meta.url);
+      const __dirname = path.dirname(__filename);
+      const wasmPath = path.resolve(__dirname, 'node_modules/@jsquash/webp/codec/dec/webp_dec.wasm');
+      const wasmModule = await WebAssembly.compile(await readFile(wasmPath));
+      await initWebpDecode(wasmModule, {});
+    })();
+  }
+
+  await webpDecoderReady;
+}
+
+async function convertWebpMacToPng(webpPath: string, tempDir: string): Promise<string> {
+  await ensureWebpDecoder();
+  const decoded = await decodeWebp(await readFile(webpPath));
+  const image = new Jimp({
+    data: Buffer.from(decoded.data.buffer, decoded.data.byteOffset, decoded.data.byteLength),
+    width: decoded.width,
+    height: decoded.height,
+  });
+  const pngPath = path.join(tempDir, `${path.basename(webpPath, path.extname(webpPath))}.png`);
+  await writeFile(pngPath, await image.getBuffer(JimpMime.png));
+  return pngPath;
+}
+
 async function copyImageMacWithOsascript(imagePath: string): Promise<void> {
   const imageType = getAppleScriptImageType(imagePath);
   const escapedPath = escapeAppleScriptString(imagePath);
@@ -215,6 +247,14 @@ async function copyImageMacWithOsascript(imagePath: string): Promise<void> {
 }
 
 async function copyImageMac(imagePath: string): Promise<void> {
+  if (path.extname(imagePath).toLowerCase() === '.webp') {
+    await withTempDir('copy-to-clipboard-', async (tempDir) => {
+      const pngPath = await convertWebpMacToPng(imagePath, tempDir);
+      await copyImageMacWithOsascript(pngPath);
+    });
+    return;
+  }
+
   await copyImageMacWithOsascript(imagePath);
 }
 
