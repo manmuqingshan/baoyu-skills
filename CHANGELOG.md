@@ -2,6 +2,12 @@
 
 English | [中文](./CHANGELOG.zh.md)
 
+## 1.117.1 - 2026-05-16
+
+### Fixes
+- `baoyu-post-to-wechat`: fix WeChat browser article publishing (by @zhangga)
+- `baoyu-post-to-wechat`: fix image upload fallback and WebP clipboard copy on macOS
+
 ## 1.117.0 - 2026-05-16
 
 ### Features

@@ -2,6 +2,12 @@
 
 [English](./CHANGELOG.md) | 中文
 
+## 1.117.1 - 2026-05-16
+
+### 修复
+- `baoyu-post-to-wechat`：修复微信浏览器文章发布问题 (by @zhangga)
+- `baoyu-post-to-wechat`：修复图片上传回退逻辑及 macOS WebP 剪贴板复制
+
 ## 1.117.0 - 2026-05-16
 
 ### 新功能
