@@ -6,6 +6,9 @@ import test from "node:test";
 
 import {
   listReleaseFiles,
+  readSkillFrontmatterVersion,
+  readSkillMetadataVersion,
+  validateSkillMetadataVersion,
   validateSelfContainedRelease,
 } from "./release-files.mjs";
 
@@ -42,6 +45,34 @@ test("listReleaseFiles skips generated paths and returns sorted relative paths",
   assert.deepEqual(
     files.map((file) => file.relPath),
     ["a.txt", "b.txt", "nested/keep.txt"],
+  );
+});
+
+test("readSkillFrontmatterVersion reads quoted and unquoted versions", () => {
+  assert.equal(readSkillFrontmatterVersion("---\nname: demo\nversion: 1.2.3\n---\n"), "1.2.3");
+  assert.equal(readSkillFrontmatterVersion("---\nversion: \"2.0.0\"\n---\n"), "2.0.0");
+  assert.equal(readSkillFrontmatterVersion("# Missing frontmatter\n"), null);
+});
+
+test("validateSkillMetadataVersion accepts matching SKILL.md version", async (t) => {
+  const root = await makeTempDir("baoyu-release-version-ok-");
+  t.after(() => fs.rm(root, { recursive: true, force: true }));
+
+  await writeFile(path.join(root, "SKILL.md"), "---\nname: demo\nversion: 1.2.3\n---\n");
+
+  assert.equal(await readSkillMetadataVersion(root), "1.2.3");
+  await assert.doesNotReject(() => validateSkillMetadataVersion(root, "1.2.3"));
+});
+
+test("validateSkillMetadataVersion rejects mismatched SKILL.md version", async (t) => {
+  const root = await makeTempDir("baoyu-release-version-mismatch-");
+  t.after(() => fs.rm(root, { recursive: true, force: true }));
+
+  await writeFile(path.join(root, "SKILL.md"), "---\nname: demo\nversion: 1.2.3\n---\n");
+
+  await assert.rejects(
+    () => validateSkillMetadataVersion(root, "1.2.4"),
+    /SKILL\.md version mismatch/,
   );
 });
 

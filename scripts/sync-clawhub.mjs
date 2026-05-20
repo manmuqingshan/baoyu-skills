@@ -6,7 +6,13 @@ import { existsSync } from "node:fs";
 import path from "node:path";
 import os from "node:os";
 
-import { listReleaseFiles, mimeType, validateSelfContainedRelease } from "./lib/release-files.mjs";
+import {
+  listReleaseFiles,
+  mimeType,
+  readSkillMetadataVersion,
+  validateSelfContainedRelease,
+  validateSkillMetadataVersion,
+} from "./lib/release-files.mjs";
 
 const DEFAULT_REGISTRY = "https://clawhub.ai";
 
@@ -38,9 +44,11 @@ async function main() {
 
   const locals = await mapWithConcurrency(skills, options.concurrency, async (skill) => {
     const files = await collectReleaseFiles(skill.folder);
+    const localVersion = await readSkillMetadataVersion(skill.folder);
     const fingerprint = buildFingerprint(files);
     return {
       ...skill,
+      localVersion,
       fileCount: files.length,
       fingerprint,
     };
@@ -119,12 +127,12 @@ async function main() {
   for (const candidate of actionable) {
     const version =
       candidate.status === "new"
-        ? "1.0.0"
-        : bumpSemver(candidate.latestVersion, options.bump);
+        ? candidate.localVersion
+        : resolveUpdateVersion(candidate, options.bump);
 
     console.log(`Publishing ${candidate.slug}@${version}`);
     try {
-      const files = await collectReleaseFiles(candidate.folder);
+      const files = await collectReleaseFiles(candidate.folder, version);
       await publishSkill({
         registry,
         token: config.token,
@@ -325,7 +333,10 @@ async function hasSkillMarker(folder) {
   );
 }
 
-async function collectReleaseFiles(root) {
+async function collectReleaseFiles(root, expectedVersion = "") {
+  if (expectedVersion) {
+    await validateSkillMetadataVersion(root, expectedVersion);
+  }
   await validateSelfContainedRelease(root);
   return listReleaseFiles(root);
 }
@@ -423,26 +434,46 @@ async function mapWithConcurrency(items, limit, fn) {
 
 function formatCandidate(candidate, bump) {
   if (candidate.status === "new") {
-    return `${candidate.slug}  NEW  (${candidate.fileCount} files)`;
+    return `${candidate.slug}  NEW ${candidate.localVersion}  (${candidate.fileCount} files)`;
   }
-  return `${candidate.slug}  UPDATE ${candidate.latestVersion} -> ${bumpSemver(
-    candidate.latestVersion,
+  return `${candidate.slug}  UPDATE ${candidate.latestVersion} -> ${resolveUpdateVersion(
+    candidate,
     bump
   )}  (${candidate.fileCount} files)`;
 }
 
-function bumpSemver(version, bump) {
-  const match = /^(\d+)\.(\d+)\.(\d+)$/.exec(version ?? "");
-  if (!match) {
-    throw new Error(`Invalid semver: ${version}`);
+function resolveUpdateVersion(candidate, bump) {
+  if (compareSemver(candidate.localVersion, candidate.latestVersion) > 0) {
+    return candidate.localVersion;
   }
-  const major = Number(match[1]);
-  const minor = Number(match[2]);
-  const patch = Number(match[3]);
+  return bumpSemver(candidate.latestVersion, bump);
+}
+
+function compareSemver(left, right) {
+  const leftParts = parseSemver(left);
+  const rightParts = parseSemver(right);
+  for (let index = 0; index < leftParts.length; index += 1) {
+    if (leftParts[index] !== rightParts[index]) {
+      return leftParts[index] - rightParts[index];
+    }
+  }
+  return 0;
+}
+
+function bumpSemver(version, bump) {
+  const [major, minor, patch] = parseSemver(version);
 
   if (bump === "major") return `${major + 1}.0.0`;
   if (bump === "minor") return `${major}.${minor + 1}.0`;
   return `${major}.${minor}.${patch + 1}`;
+}
+
+function parseSemver(version) {
+  const match = /^(\d+)\.(\d+)\.(\d+)$/.exec(version ?? "");
+  if (!match) {
+    throw new Error(`Invalid semver: ${version}`);
+  }
+  return [Number(match[1]), Number(match[2]), Number(match[3])];
 }
 
 function sanitizeSlug(value) {

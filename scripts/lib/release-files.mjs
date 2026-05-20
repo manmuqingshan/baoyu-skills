@@ -25,6 +25,37 @@ const MIME_MAP = {
   ".svg": "image/svg+xml",
 };
 
+export async function readSkillMetadataVersion(root) {
+  const skillFile = await findSkillMarkdown(root);
+  const source = await fs.readFile(skillFile, "utf8");
+  const version = readSkillFrontmatterVersion(source);
+  if (!version) {
+    throw new Error(`Missing version in ${path.relative(process.cwd(), skillFile) || skillFile}`);
+  }
+  return version;
+}
+
+export async function validateSkillMetadataVersion(root, expectedVersion) {
+  const actualVersion = await readSkillMetadataVersion(root);
+  if (actualVersion !== expectedVersion) {
+    throw new Error(
+      `SKILL.md version mismatch for ${path.basename(path.resolve(root))}: expected ${expectedVersion}, found ${actualVersion}`,
+    );
+  }
+}
+
+export function readSkillFrontmatterVersion(source) {
+  const match = /^\uFEFF?---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/.exec(source);
+  if (!match) return null;
+
+  for (const line of match[1].split(/\r?\n/)) {
+    const versionMatch = /^version:\s*["']?([^"'\s#]+)["']?\s*(?:#.*)?$/.exec(line.trim());
+    if (versionMatch) return versionMatch[1];
+  }
+
+  return null;
+}
+
 export async function listReleaseFiles(root) {
   const resolvedRoot = path.resolve(root);
   const files = [];
@@ -51,6 +82,20 @@ export async function listReleaseFiles(root) {
   await walk(resolvedRoot);
   files.sort((left, right) => left.relPath.localeCompare(right.relPath));
   return files;
+}
+
+async function findSkillMarkdown(root) {
+  const resolvedRoot = path.resolve(root);
+  for (const name of ["SKILL.md", "skill.md"]) {
+    const candidate = path.join(resolvedRoot, name);
+    try {
+      const stat = await fs.stat(candidate);
+      if (stat.isFile()) return candidate;
+    } catch {
+      // Try the next supported skill filename.
+    }
+  }
+  throw new Error(`Missing SKILL.md in ${resolvedRoot}`);
 }
 
 export async function validateSelfContainedRelease(root) {

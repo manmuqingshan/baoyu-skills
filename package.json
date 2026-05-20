@@ -7,7 +7,8 @@
   ],
   "scripts": {
     "test": "node ./scripts/run-node-tests.mjs",
-    "test:coverage": "node ./scripts/run-node-tests.mjs --experimental-test-coverage"
+    "test:coverage": "node ./scripts/run-node-tests.mjs --experimental-test-coverage",
+    "verify:skill-release-commits": "node ./scripts/verify-skill-release-commits.mjs"
   },
   "devDependencies": {
     "@mozilla/readability": "^0.6.0",

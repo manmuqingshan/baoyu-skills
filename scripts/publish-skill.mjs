@@ -5,7 +5,12 @@ import { existsSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
 
-import { listReleaseFiles, mimeType, validateSelfContainedRelease } from "./lib/release-files.mjs";
+import {
+  listReleaseFiles,
+  mimeType,
+  validateSelfContainedRelease,
+  validateSkillMetadataVersion,
+} from "./lib/release-files.mjs";
 
 const DEFAULT_REGISTRY = "https://clawhub.ai";
 
@@ -21,6 +26,7 @@ async function main() {
     ? await fs.readFile(path.resolve(options.changelogFile), "utf8")
     : "";
 
+  await validateSkillMetadataVersion(skillDir, options.version);
   await validateSelfContainedRelease(skillDir);
   const files = await listReleaseFiles(skillDir);
   if (files.length === 0) {
