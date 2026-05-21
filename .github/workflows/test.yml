@@ -26,5 +26,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Install baoyu-post-to-wechat script dependencies
+        run: |
+          cd skills/baoyu-post-to-wechat/scripts
+          npm install --no-audit --no-fund --ignore-scripts
+
       - name: Run tests
         run: npm test

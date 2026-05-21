@@ -612,8 +612,9 @@ clawhub install baoyu-markdown-to-html
 
 | 方式 | 速度 | 要求 |
 |------|------|------|
-| API（推荐） | 快 | API 凭证 |
+| API（推荐） | 快 | API 凭证（本机 IP 在公众号白名单内） |
 | 浏览器 | 慢 | Chrome，登录会话 |
+| 远程 API | 快 | API 凭证 + 一台 IP 在公众号白名单内、可 SSH 登录的服务器 |
 
 **API 配置**（更快的发布方式）：
 
@@ -630,6 +631,8 @@ WECHAT_APP_SECRET=你的AppSecret
 4. 将你操作的机器 IP 加入白名单
 
 **浏览器方式**（无需 API 配置）：需已安装 Google Chrome，首次运行需扫码登录（登录状态会保存）
+
+**远程 API 方式**（适用于本机 IP 不在公众号白名单内的情况）：通过 SSH SOCKS5 动态端口转发，将对 `api.weixin.qq.com` 的 HTTPS 调用转发到 IP 在白名单内的服务器上。Markdown 渲染、图片处理、草稿组装仍在本地完成；远端不会落任何文件，`AppSecret` 不会离开本地进程。仅支持 SSH 密钥认证，且只接受类型化的 `remote_publish_*` 配置项，不透传任意 ssh 选项。在 EXTEND.md 中配置 `remote_publish_host` 等字段后，发布时加上 `--remote`（或将 `default_publish_method` 设为 `remote-api`）。
 
 **多账号支持**：通过 `EXTEND.md` 管理多个微信公众号：
 

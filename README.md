@@ -612,8 +612,9 @@ Post content to WeChat Official Account (微信公众号). Two modes available:
 
 | Method | Speed | Requirements |
 |--------|-------|--------------|
-| API (Recommended) | Fast | API credentials |
+| API (Recommended) | Fast | API credentials (local IP allowlisted in WeChat) |
 | Browser | Slow | Chrome, login session |
+| Remote API | Fast | API credentials + SSH-reachable server whose IP is on WeChat's allowlist |
 
 **API Configuration** (for faster publishing):
 
@@ -630,6 +631,17 @@ To obtain credentials:
 4. Add your machine's IP to the whitelist
 
 **Browser Method** (no API setup needed): Requires Google Chrome. First run opens browser for QR code login (session preserved).
+
+**Remote API Method** (for when WeChat's IP allowlist excludes your local machine): tunnels WeChat API calls through an SSH SOCKS5 dynamic port forward to a server whose IP is on the allowlist. No files are written to the remote host and `AppSecret` never leaves the local process. Add to your EXTEND.md:
+
+```yaml
+# Optional: only set when WeChat's IP allowlist excludes your local machine
+remote_publish_host: server.example.com
+remote_publish_user: deploy
+remote_publish_identity_file: ~/.ssh/id_ed25519
+```
+
+Then publish with `--remote` (or set `default_publish_method: remote-api`). Authentication is SSH key only; only the typed `remote_publish_*` keys are honored.
 
 **Multi-Account Support**: Manage multiple WeChat Official Accounts via `EXTEND.md`:
 
