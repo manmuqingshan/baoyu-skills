@@ -2,6 +2,17 @@
 
 English | [中文](./CHANGELOG.zh.md)
 
+## 1.117.4 - 2026-05-21
+
+### Features
+- `baoyu-post-to-wechat`: add remote API publishing via an SSH SOCKS5 tunnel
+
+### Fixes
+- `baoyu-post-to-wechat`: make remote API publishing work under Bun and strictly validate remote publish config
+
+### CI
+- Install `baoyu-post-to-wechat` script dependencies before running tests
+
 ## 1.117.3 - 2026-05-20
 
 ### Features

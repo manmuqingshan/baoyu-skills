@@ -2,6 +2,17 @@
 
 [English](./CHANGELOG.md) | 中文
 
+## 1.117.4 - 2026-05-21
+
+### 新功能
+- `baoyu-post-to-wechat`：新增通过 SSH SOCKS5 隧道进行远程 API 发布
+
+### 修复
+- `baoyu-post-to-wechat`：修复远程 API 发布在 Bun 下的运行问题，并严格校验远程发布配置
+
+### CI
+- 测试前安装 `baoyu-post-to-wechat` 脚本依赖
+
 ## 1.117.3 - 2026-05-20
 
 ### 新功能
