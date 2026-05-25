@@ -2,6 +2,19 @@
 
 English | [中文](./CHANGELOG.zh.md)
 
+## 2.2.0 - 2026-05-25
+
+### Features
+- `baoyu-image-gen`: new `codex-cli` provider that wraps the `codex-imagegen` backend so the Codex `image_gen` tool is reachable through the standard `--provider` / batch / EXTEND.md flow. Uses the user's Codex subscription — no `OPENAI_API_KEY` required. Adds env vars `BAOYU_CODEX_IMAGEGEN_{BIN,CACHE_DIR,TIMEOUT_MS,RETRIES,LOG_FILE}` and resolves hyphenated provider names for `BAOYU_IMAGE_GEN_<PROVIDER>_*` overrides (e.g., `BAOYU_IMAGE_GEN_CODEX_CLI_CONCURRENCY`). `codex-cli` is never auto-selected — pin via `--provider codex-cli` or `default_provider: codex-cli` in EXTEND.md
+
+### Refactor
+- `codex-imagegen`: extracted from `scripts/codex-imagegen/` + `scripts/codex-imagegen.sh` to its own workspace package at `packages/baoyu-codex-imagegen/`. The bash shim is gone; `src/main.ts` now carries a `#!/usr/bin/env bun` shebang and is the sole entrypoint (`bun packages/baoyu-codex-imagegen/src/main.ts …` or, without bun on `PATH`, `npx -y bun …`). `scripts/sync-codex-imagegen.sh` keeps `skills/baoyu-image-gen/scripts/codex-imagegen/` in sync for skill self-containment
+
+### Documentation
+- `baoyu-cover-image`: replace the long inline `scripts/codex-imagegen.sh` invocation block in `SKILL.md` with a pointer to `references/codex-imagegen.md`, documenting the preferred `baoyu-image-gen --provider codex-cli` path and keeping the direct-wrapper fallback
+- `baoyu-article-illustrator`, `baoyu-comic`, `baoyu-infographic`, `baoyu-slide-deck`, `baoyu-xhs-images`: add a `Codex via codex exec` branch to each skill's backend-selection ladder and ship a per-skill `references/codex-imagegen.md` with the invocation contract (preferred path, fallback, stdout schema, batch semantics)
+- `docs/codex-imagegen-backend.md` and `CLAUDE.md`: update path layout and invocation examples to reflect the new workspace package location
+
 ## 2.1.0 - 2026-05-24
 
 ### Features

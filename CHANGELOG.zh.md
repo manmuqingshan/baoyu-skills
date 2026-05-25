@@ -2,6 +2,19 @@
 
 [English](./CHANGELOG.md) | 中文
 
+## 2.2.0 - 2026-05-25
+
+### 新功能
+- `baoyu-image-gen`：新增 `codex-cli` provider，封装 `codex-imagegen` 后端，让 Codex 内置的 `image_gen` 工具也能走标准的 `--provider` / 批量 / EXTEND.md 流程。使用用户自己的 Codex 订阅,无需 `OPENAI_API_KEY`。新增环境变量 `BAOYU_CODEX_IMAGEGEN_{BIN,CACHE_DIR,TIMEOUT_MS,RETRIES,LOG_FILE}`；`BAOYU_IMAGE_GEN_<PROVIDER>_*` 类覆盖项支持带连字符的 provider 名称(如 `BAOYU_IMAGE_GEN_CODEX_CLI_CONCURRENCY`)。`codex-cli` **不会**自动选用,需通过 `--provider codex-cli` 或 EXTEND.md 的 `default_provider: codex-cli` 显式指定
+
+### 重构
+- `codex-imagegen`：从 `scripts/codex-imagegen/` + `scripts/codex-imagegen.sh` 拆分为独立的 workspace 包 `packages/baoyu-codex-imagegen/`。bash 包装器已移除,`src/main.ts` 自带 `#!/usr/bin/env bun` shebang,作为唯一入口(`bun packages/baoyu-codex-imagegen/src/main.ts …`,若 `PATH` 中无 bun 则 `npx -y bun …`)。新增 `scripts/sync-codex-imagegen.sh` 同步 `skills/baoyu-image-gen/scripts/codex-imagegen/`,保持 skill 自包含
+
+### 文档
+- `baoyu-cover-image`：`SKILL.md` 中较长的 `scripts/codex-imagegen.sh` 内联调用块替换为指向 `references/codex-imagegen.md` 的链接,文档明确优先走 `baoyu-image-gen --provider codex-cli`、并保留直接调用 wrapper 的回退路径
+- `baoyu-article-illustrator`、`baoyu-comic`、`baoyu-infographic`、`baoyu-slide-deck`、`baoyu-xhs-images`：在各自 backend 选择阶梯中新增 `Codex via codex exec` 分支,并附带 per-skill 的 `references/codex-imagegen.md`(优先路径、回退、stdout schema、批量语义)
+- `docs/codex-imagegen-backend.md` 与 `CLAUDE.md`：同步新的 workspace 路径与调用示例
+
 ## 2.1.0 - 2026-05-24
 
 ### 新功能
